@@ -20,7 +20,6 @@ public class ContactServiceImpl implements ContactService {
     
     private static final Logger logger = LoggerFactory.getLogger(ContactServiceImpl.class);
     
-    private static final String EMPTY =  "";
     private static final Gson gson = new Gson();
     
     @Autowired
@@ -69,7 +68,7 @@ public class ContactServiceImpl implements ContactService {
             // Converts the data from json to contact object and insert in the list
             if ( jsonInputList != null && jsonInputList.size() > 0 ) {
                 for ( String contactString : jsonInputList ) {
-                    if ( contactString != null && !EMPTY.equals(contactString) ) {
+                    if ( contactString != null && !contactString.isEmpty() ) {
                         Contact contact = gson.fromJson(contactString, Contact.class);
                         contacts.add(contact);
                     }
@@ -111,7 +110,7 @@ public class ContactServiceImpl implements ContactService {
      * @return
      */
     private Contact findByEmail(String email, List<Contact> contacts) {
-        if ( !Objects.isNull(email) && !EMPTY.equals(email) 
+        if ( !Objects.isNull(email) && !email.isEmpty() 
                 && !Objects.isNull(contacts) && contacts.size() > 0 ) {
             for ( Contact contact : contacts ) {
                 if ( contact.getEmail().equals(email) ) {
@@ -166,22 +165,22 @@ public class ContactServiceImpl implements ContactService {
             result = false;
         } else {
 
-            if ( Objects.isNull(contact.getName()) || EMPTY.equals(contact.getName()) ) {
+            if ( Objects.isNull(contact.getName()) || contact.getName().isEmpty() ) {
                 logger.warn("The contact name is invalid");
                 result = false;
             }
             
-            if ( Objects.isNull(contact.getSurname()) || EMPTY.equals(contact.getSurname()) ) {
+            if ( Objects.isNull(contact.getSurname()) || contact.getSurname().isEmpty() ) {
                 logger.warn("The contact surname is invalid");
                 result = false;
             }
             
-            if ( Objects.isNull(contact.getPhoneNumber()) || EMPTY.equals(contact.getPhoneNumber()) ) {
+            if ( Objects.isNull(contact.getPhoneNumber()) || contact.getPhoneNumber().isEmpty() ) {
                 logger.warn("The contact phone number is invalid");
                 result = false;
             }
             
-            if ( Objects.isNull(contact.getEmail()) || EMPTY.equals(contact.getEmail()) || !EmailValidator.isValidEmail(contact.getEmail()) ) {
+            if ( Objects.isNull(contact.getEmail()) || contact.getEmail().isEmpty() || !EmailValidator.isValidEmail(contact.getEmail()) ) {
                 logger.warn("The contact email is invalid");
                 result = false;
             }
