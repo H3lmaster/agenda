@@ -1,0 +1,2 @@
+
+{"name":"Anthony","surname":"Lewis","phoneNumber":"7123123123","email":"lewis@mail.com","age":0,"category":{"yearsOfFriendship":0}}
