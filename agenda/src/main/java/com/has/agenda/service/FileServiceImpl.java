@@ -48,16 +48,20 @@ public class FileServiceImpl implements FileService {
     private void write(String data, boolean append) {
 
         try {
-            this.createFile();
-            FileWriter fileWriter = new FileWriter(fileName, append);
-            BufferedWriter bufferWriter = new BufferedWriter(fileWriter);
-            bufferWriter.write(data.toString());
-            if ( !EMPTY.equals(data) ) {
-                bufferWriter.newLine();
+            
+            if ( !Objects.isNull(data) ) {
+                this.createFile();
+                FileWriter fileWriter = new FileWriter(fileName, append);
+                BufferedWriter bufferWriter = new BufferedWriter(fileWriter);
+                bufferWriter.write(data.toString());
+                if ( !data.isEmpty() ) {
+                    bufferWriter.newLine();
+                }
+                bufferWriter.close();
+                fileWriter.close();
+                logger.debug("File saved successfully.");
             }
-            bufferWriter.close();
-            fileWriter.close();
-            logger.debug("File saved successfully.");
+            
         } catch (IOException ex) {
             logger.error("An error occurred when saving to the file...", ex);
         }
