@@ -38,6 +38,20 @@ public class ContactBuilder {
         return this;
     }
     
+    public ContactBuilder withAge(String age) {
+        try {
+            this.age = Integer.parseInt(age);
+        } catch (Exception ex) {
+            this.age = -1;
+        }
+        return this;
+    }
+    
+    public ContactBuilder withHairColor(String hairColor) {
+        this.hairColor = hairColor;
+        return this;
+    }
+    
     public ContactBuilder withCategoryName(CategoryName categoryName)  {
         this.categoryName = categoryName;
         return this;
@@ -47,8 +61,13 @@ public class ContactBuilder {
         this.categoryDescription = categoryDescription;
         return this;
     }
-    public ContactBuilder withYearsOfFriendship(int yearsOfFriendship)  {
-        this.yearsOfFriendship = yearsOfFriendship;
+    
+    public ContactBuilder withYearsOfFriendship(String yearsOfFriendship)  {
+        try {
+            this.yearsOfFriendship = Integer.parseInt(yearsOfFriendship);
+        } catch (Exception ex) {
+            this.yearsOfFriendship = -1;
+        }
         return this;
     }
     
